@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+	<title>My Awesome Login Page</title>
+    <style>
+        html{
+            background-image: url('https://scontent.fhph2-1.fna.fbcdn.net/v/t39.30808-6/266375231_3228609967370676_6140958875830204864_n.jpg?_nc_cat=109&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=Y8YAFHBsoX4AX8IhWwx&_nc_ht=scontent.fhph2-1.fna&oh=00_AT9GfhydwmKQhtB_5gqBCQlcCOA1lb0-1qeMX7L4pS8ZQg&oe=61F2FF15');
+        }
+        .bg{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100vw;
+            height: 100vh;
+        }
+        .con{
+            display: flex;
+            background-color: rgba(226, 217, 218, 0.9);
+            width: 80vw;
+            height: 80vh;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px 10px 10px 10px;
+        }
+        .box{
+            display: flex;
+            flex-direction: column;
+            height: 50vh;
+            width: 60vw;
+            align-items: center;
+            justify-content: space-around;
+        }
+        input{
+            color: rgb(218, 65, 91);
+            font-weight:600;
+            background-color: rgb(239, 239, 239);
+            width: 60vw;
+            height: 6vh;
+            border-radius: 10px 10px 10px 10px;
+            border: none;
+            outline: none;
+            text-align: center;
+        }
+        input::placeholder{
+            color: rgb(207, 181, 185);
+            text-align: center;
+        }
+        button{
+            width: 45vw;
+            height: 6vh;
+            border-radius: 10px 10px 10px 10px;
+            border: none;
+            outline: none;
+            background-color: rgb(218, 65, 91);
+            color: rgb(239, 239, 239);
+            font-weight:600;
+            cursor: pointer;
+        }
+        button:hover{
+            width: 45vw;
+            height: 6vh;
+            border-radius: 10px 10px 10px 10px;
+            border: none;
+            color: rgb(218, 65, 91);
+            background-color: rgb(239, 239, 239);
+            font-weight:600;
+            border: 2.5px solid rgb(218, 65, 91);
+        }
+        button:active{
+            width: 45vw;
+            height: 6vh;
+            border-radius: 10px 10px 10px 10px;
+            border: none;
+            color: rgb(218, 65, 91);
+            background-color: rgb(239, 239, 239);
+            font-weight:600;
+        }
+        #demo{
+            color: rgb(218, 65, 91);
+            font-weight:600;
+        }
+    </style>
+</head>
+<!--Coded with love by Mutiullah Samim-->
+<body>
+	<div class="bg">
+        <div class="con">
+            <div class="box">
+                <input id="ty_gia" type="number" value="" placeholder="Tỉ Giá"/>
+                <input id="gia_web" type="number" value="" placeholder="Giá Web"/>
+                <input id="ngoc_lai" type="number" value="1.5" placeholder="Tỉ Lệ % Ngọc Lãi"/>
+                <input id="can_nang" type="number" value="25000" placeholder= "Giá Cân Nặng"/>
+                <button onclick="c()">Tính Tiền</button>
+            </div>
+                <div id="demo"></div>
+        </div>
+	</div>
+    <script>
+        function c(){
+            let ty_gia = parseFloat(document.getElementById("ty_gia").value);
+            let gia_web = parseFloat(document.getElementById("gia_web").value);
+            let ngoc_lai = parseFloat(document.getElementById("ngoc_lai").value);
+            let can_nang = parseFloat(document.getElementById("can_nang").value);
+            let r = ty_gia * gia_web * ngoc_lai + can_nang;
+            let _r = r.toString();
+            if(document.getElementById("ty_gia").value == "" && document.getElementById("gia_web").value ==""){
+                document.getElementById("demo").innerHTML = "NGỌC CHƯA NHẬP TỶ GIÁ VÀ GIÁ WEB"
+            } else if(document.getElementById("ty_gia").value == "") {
+                document.getElementById("demo").innerHTML = "NGỌC CHƯA NHẬP TỶ GIÁ";
+            } else if(document.getElementById("gia_web").value == "") {
+                document.getElementById("demo").innerHTML = "NGỌC CHƯA NHẬP GIÁ WEB";
+            } else {
+                let str = parseInt(_r).toString();
+                console.log("str",str)
+                let size = str.length;
+                console.log("size", size)
+                if(size >= 4 && size <= 6){
+                    str = str.split("").reverse().join("");
+                    str = str.substring(0,3) + "," + str.substring(3,str.length)
+                    str = str.split("").reverse().join("");
+                    document.getElementById("demo").innerHTML = str;
+                }
+                if(size >= 7 && size <= 9){
+                    str = str.split("").reverse().join("");
+                    str = str.substring(0,3) + "," + str.substring(3,6) + "," + str.substring(6,str.length)
+                    str = str.split("").reverse().join("");
+                    document.getElementById("demo").innerHTML = str;
+                }
+                console.log("str", str)
+            }
+            
+        }
+    </script>
+</body>
+</html>
